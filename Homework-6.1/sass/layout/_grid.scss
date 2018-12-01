@@ -1,0 +1,46 @@
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.my-slider__list {
+  display: flex;
+  position: relative;
+}
+
+.my-slider__on-item {
+  min-width: 100%;
+  height: 600px;
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.my-slider__navigation {
+  font-size: 21px;
+}
+
+.my-slider__on-item--show {
+  z-index: 3;
+}
+
+/* my-slider__all-dots */
+
+.my-slider__all-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 650px;
+}
+
+.my-slider__one-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: blue;
+  margin: 20px;
+  cursor: pointer;
+}
