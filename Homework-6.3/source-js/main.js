@@ -118,15 +118,15 @@ isSorted([3, 9, -3, 10]);
 
 // reverse
 
-function reverse (myString) {
+function myReverse (myString) {
 
   var newMyString = '';
   var i;
-  if (myString.length == 0) {
+  if (myString.length === 0) {
     newMyString = "''";
   } else {
     for (i = myString.length - 1; i >= 0; i--) {
-      newMyString += myString.charAt(i);
+      newMyString = newMyString + myString.charAt(i);
     }
   }
 
@@ -136,8 +136,8 @@ function reverse (myString) {
 }
 
 console.log('---------------reverse------------');
-reverse('');
-reverse('abcdef');
+myReverse('');
+myReverse('abcdef');
 
 // indexOf
 
@@ -146,7 +146,7 @@ function indexOf (myMassive, myNumber) {
   var answer;
 
   for (i = 0; i < myMassive.length; i++) {
-    if (myMassive[i] == myNumber) {
+    if (myMassive[i] === myNumber) {
       answer = i;
       break;
     } else {
@@ -161,3 +161,112 @@ console.log('---------------indexOf------------');
 indexOf([1, 2, 3], 1);
 indexOf([1, 2, 3], 4);
 
+// isPalindrome
+
+function isPalindrome (myString) {
+  var myStringWithoutSpaces = myString.replace(/\s/g, '');
+  var myStringLowerCase = myStringWithoutSpaces.toLowerCase();
+  var newMyString = '';
+  var i;
+
+  if (myStringLowerCase.length === 0) {
+    newMyString = "''";
+  } else {
+    for (i = myString.length - 1; i >= 0; i--) {
+      newMyString = newMyString + myStringLowerCase.charAt(i);
+    }
+  }
+
+
+  if (newMyString === myStringLowerCase) {
+    console.log(true);
+  } else if (myStringLowerCase === '') {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
+
+
+
+}
+
+console.log('---------------isPalindrome------------');
+isPalindrome('');                              // true
+isPalindrome('abcdcba');                // true
+isPalindrome('abcd');                      // false
+isPalindrome('A man a plan a canal Panama');  // true
+
+// missing
+
+function missing (myMassive) {
+  var newMassive = [];
+
+  for (var i = 0; i < myMassive.length; i++) {
+    var numberForNewMassive = myMassive[i];
+    newMassive[numberForNewMassive] = numberForNewMassive;
+  }
+
+  newMassive[0] = 0;
+  var x;
+  var answer;
+  for (x = 1; x < newMassive.length; x++) {
+    if ( undefined === newMassive[x]) {
+      answer = x;
+    }
+  }
+  console.log(answer);
+
+}
+
+console.log('---------------missing------------');
+missing([]);
+missing([1, 4, 3]);
+missing([2, 3, 4]);
+missing([5, 1, 4, 2]);
+missing([1, 2, 3, 4]);
+
+/* isBalanced */
+
+function isBalanced (myString) {
+  var numberOfCharactersOpen = 0;
+  var numberOfCharactersClose = 0;
+  var numberOfSpaces = 0;
+  var numberOfReservedWords = 0;
+  var stringArray = [];
+
+  string = myString.split(" ");
+
+  for(var i =0; i < string.length; i++){
+    stringArray.push(string[i]);
+    if(i != string.length-1){
+      stringArray.push(" ");
+    }
+
+  }
+
+  for (var x = 0; x < stringArray.length; x++) {
+    if (stringArray[x] === "{") {
+      numberOfCharactersOpen = numberOfCharactersOpen + 1;
+    } else if (stringArray[x] === "}") {
+      numberOfCharactersClose = numberOfCharactersClose + 1;
+    } else if (stringArray[x] === " ") {
+      numberOfSpaces = numberOfSpaces + 1;
+    } else if ((stringArray[x] != "{") || (stringArray[x] != "}") || (stringArray[x] != " ")) {
+      numberOfReservedWords = numberOfReservedWords + 1;
+    }
+  }
+  if ((numberOfCharactersOpen === numberOfCharactersClose) && (numberOfSpaces != 0) && (numberOfReservedWords != 0)) {
+    console.log(true);
+  } else {
+    console.log(false);
+  }
+
+};
+
+console.log('---------------isBalanced------------');
+isBalanced('}{');
+isBalanced('{{}');
+isBalanced('{}{}');
+isBalanced('foo { bar { baz } boo }');
+isBalanced('foo { bar { baz }');
+isBalanced('foo { bar } }');

@@ -7,7 +7,28 @@ var nowSlide = 0;
 /* При клікі на клавішу "Prev" */
 var slideAll = document.getElementsByClassName('my-slider__on-item');//для визначення дожвини (кількості) слайдів
 
+function funcraAddClass (allSlide, nowSlide, slideAll) {
 
+  if (0 < nowSlide && nowSlide < (slideAll.length - 1)) {
+    allSlide[nowSlide + 1].classList.add("my-slider__on-item--next");
+    allSlide[nowSlide - 1].classList.add("my-slider__on-item--prev");
+  } else if (0 == nowSlide) {
+    allSlide[nowSlide + 1].classList.add("my-slider__on-item--next");
+    allSlide[slideAll.length - 1].classList.add("my-slider__on-item--prev");
+  } else if (nowSlide == (slideAll.length - 1)) {
+    allSlide[0].classList.add("my-slider__on-item--next");
+    allSlide[nowSlide - 1].classList.add("my-slider__on-item--prev");
+  }
+
+};
+
+function funcrRemoveClass (allSlide) {
+  for (var i = 0; i < allSlide.length; i++) {//the loop is designed to crawl the resulting array
+    allSlide[i].classList.remove("my-slider__on-item--prev");
+    allSlide[i].classList.remove("my-slider__on-item--show");
+    allSlide[i].classList.remove("my-slider__on-item--next");
+  }
+};
 
 
 
@@ -20,9 +41,7 @@ prevItemB.onclick = function () {
 
   var allSlide = document.getElementsByClassName('my-slider__on-item');
 
-  for (var i = 0; i < allSlide.length; i++) {//the loop is designed to crawl the resulting array
-    allSlide[i].classList.remove("my-slider__on-item--show");
-  }
+  funcrRemoveClass(allSlide);
 
   if (nowSlide <= 0) {
     nowSlide = slideAll.length;
@@ -30,10 +49,12 @@ prevItemB.onclick = function () {
 
   nowSlide = nowSlide - 1;
 
- // console.log(nowSlide);
-
   allSlide[nowSlide].classList.add("my-slider__on-item--show");
+
+  funcraAddClass(allSlide, nowSlide, slideAll);
+
   return nowSlide;
+
 };
 
 
@@ -57,20 +78,20 @@ nextItemB.onclick = function () {
 
   var allSlide = document.getElementsByClassName('my-slider__on-item');
 
-  for (var i = 0; i < allSlide.length; i++) {//the loop is designed to crawl the resulting array
-    allSlide[i].classList.remove("my-slider__on-item--show");
-  }
-
-  if (nowSlide > slideAll.length) {
-    nowSlide = 0;
-  }
+  funcrRemoveClass(allSlide);
 
   nowSlide = nowSlide + 1;
 
-   console.log(slideAll.length);
+  if (nowSlide > (slideAll.length -1)) {
+    nowSlide = 0;
+  }
 
   allSlide[nowSlide].classList.add("my-slider__on-item--show");
+
+  funcraAddClass(allSlide, nowSlide, slideAll);
+
   return nowSlide;
+
 };
 
 
@@ -105,43 +126,20 @@ parent.onclick = function (e) {
     if(parent.children[i] == target) {
       nowSlide = i;
 
-
       var allSlide = document.getElementsByClassName('my-slider__on-item');
 
-      for (var i = 0; i < allSlide.length; i++) {//the loop is designed to crawl the resulting array
-        allSlide[i].classList.remove("my-slider__on-item--show");
-      }
-
+      funcrRemoveClass(allSlide);
 
       allSlide[nowSlide].classList.add("my-slider__on-item--show");
 
-      return nowSlide;
+      funcraAddClass(allSlide, nowSlide, slideAll);
 
+      return nowSlide;
 
     };
 
-
-
-
-
-
-
   }
+
 };
 
 
-
-
-
-
-
-
-
-
-/*
-
-
-var nowNumberDot = nowDotB.getAttribute('data-number');
-console.log(nowNumberDot);
-
-*/
